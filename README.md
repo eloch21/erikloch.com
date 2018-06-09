@@ -1,2 +1,3 @@
-# erikloch.com
-This is my portfolio
+# Erik Loch's Portfolio
+
+This is my professional portfolio. It uses AWS and ReactJS.
