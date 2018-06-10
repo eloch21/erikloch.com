@@ -1,6 +1,9 @@
 version: 0.1
 
 phases:
+  pre_build:
+    commands:
+      - echo Hello world
   build:
     commands:
       - echo Nothing to do yet
