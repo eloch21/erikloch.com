@@ -24,8 +24,8 @@
   background-color: rgb(52, 152, 219);
 }
 
-.color--skyBlue {
-  color: rgb(52, 152, 219);
+.color--blue {
+  color:#0074D9;
 }
 
 .color--cloud {
@@ -60,13 +60,17 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   letter-spacing: .1rem;
 }
+
 
 /*
   Helpers
 */
+main > h1{
+  line-height: 10rem;
+}
 
 .margin--none {
   margin: 0;
