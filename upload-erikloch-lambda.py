@@ -1,4 +1,5 @@
 import boto3
+from botocore.client import Config
 import StringIO
 import zipfile
 import mimetypes
@@ -13,7 +14,7 @@ def lambda_handler(event, context):
     }
 
     try:
-        job = event.get("CodePipline.job")
+        job = event.get("CodePipeline.job")
 
         if job:
             for artifact in job["data"]["inputArtifacts"]:
@@ -21,7 +22,8 @@ def lambda_handler(event, context):
                     location = artifact["location"]["s3Location"]
 
         print "Building portfolio from " + str(location)
-        s3 = boto3.resource('s3')
+
+        s3 = boto3.resource('s3', config=Config(signature_version='s3v4'))
 
         erikloch_bucket = s3.Bucket('erikloch.com')
         build_bucket = s3.Bucket(location["bucketName"])
@@ -39,8 +41,8 @@ def lambda_handler(event, context):
         print "Job Done!"
         topic.publish(Subject="erikloch.com deployed", Message="erikloch.com deployed successfully")
         if job:
-            codePipline = boto3.client('codepipline')
-            codepipline.put_job_success_result(jobId=job["id"])
+            codePipeline = boto3.client('codepipeline')
+            codepipeline.put_job_success_result(jobId=job["id"])
     except:
         topic.publish(Subject="erikloch.com deployed Failed", Message="erikloch.com was not deployed successfully")
         raise
