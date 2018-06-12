@@ -6,7 +6,8 @@ phases:
       - echo Hello world
   build:
     commands:
-      - echo Nothing to do yet
+      - npm install
+      - npm run webpack
 artifacts:
   files:
     - index.html
@@ -14,3 +15,4 @@ artifacts:
     - erik-resume.pdf
     - styles/main.css
     - images/*
+    - dist/bundle.js
